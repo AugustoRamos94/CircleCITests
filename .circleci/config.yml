@@ -11,3 +11,16 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - welcome/run
+      - build
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $authorName
+      
+
