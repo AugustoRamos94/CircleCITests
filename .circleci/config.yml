@@ -1,7 +1,3 @@
-Solution: Infrastructure Creation
-
-Your config.yml should look something like this:
-
 version: 2.1
 
 jobs:
