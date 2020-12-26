@@ -7,7 +7,7 @@ executor:
   name: default
   python-version: 3.7.4
 jobs:
-  setup_cli:
+  setupCLI:
     steps:
       - aws-cli/install
       - aws-cli/configure:
@@ -24,4 +24,4 @@ jobs:
 workflows:
   my_workflow:
     jobs:
-      - setup-cli
+      - setupCLI
