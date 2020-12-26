@@ -22,9 +22,9 @@ jobs:
               --template-file template.yml \
               --stack-name my-stack \
               --region=us-west-2
+              --aws-access-key-id augusto-cli
 workflows:
   my_workflow:
     jobs:
-      - aws-cli:
-            context: aws
+      - aws-cli
       - create_infrastructure
