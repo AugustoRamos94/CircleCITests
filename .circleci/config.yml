@@ -12,6 +12,18 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - aws-cli/install
+      - run:
+          command: |
+            aws configure set aws_access_key_id \
+              $AWS_ACCESS_KEY_ID \
+              --profile augusto-circleCI
+          name: Configure AWS Access Key ID
+      - run:
+          command: |
+            aws configure set aws_secret_access_key \
+              $AWS_SECRET_ACCESS_KEY \
+              --profile augusto-circleCI
+          name: Configure AWS Secret Access Key
       - checkout
       - run:
           name: Ensure backend infrastructure exist
