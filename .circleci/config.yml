@@ -1,41 +1,22 @@
+Solution: Infrastructure Creation
+
+Your config.yml should look something like this:
+
 version: 2.1
 
-commands:
-  print_pipeline_id:
-    description: "Priting the pipeline id"
-    steps:
-      - run: echo ${CIRCLE_WORKFLOW_ID}
-
-
 jobs:
-  save_hello_world_output:
+  create_infrastructure:
     docker:
-      - image: circleci/node:13.8.0
+      - image: amazon/aws-cli
     steps:
-      - print_pipeline_id
-      - run: echo "hello world" > ~/output.txt
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - output.txt
-      - run: return 1
+      - checkout
       - run:
-          name: on error
-          command: echo "Hello Error!"
-          when: on_fail
-
-  print_output_file:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - attach_workspace:
-          at: ~/
-      - run: cat ~/output.txt
-
+          name: Ensure backend infrastructure exist
+          command: |
+            aws cloudformation deploy \
+              --template-file template.yml \
+              --stack-name my-stack
 workflows:
   my_workflow:
     jobs:
-      - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
+      - create_infrastructure
