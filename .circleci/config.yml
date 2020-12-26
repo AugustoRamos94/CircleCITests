@@ -8,6 +8,8 @@ executor:
   python-version: 3.7.4
 jobs:
   setupCLI:
+    docker:
+      - image: amazon/aws-cli
     steps:
       - aws-cli/install
       - aws-cli/configure:
