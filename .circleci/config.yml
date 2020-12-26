@@ -20,8 +20,8 @@ jobs:
               --template-file template.yml \
               --stack-name my-stack \
               --region=us-west-2 \
-              --aws-access-key-id $AWS_ACCESS_KEY_ID \
-              --aws-secret-access-key $AWS_SECRET_ACCESS_KEY \
+              --aws-access-key-id=$AWS_ACCESS_KEY_ID \
+              --aws-secret-access-key=$AWS_SECRET_ACCESS_KEY \
               --capabilities CAPABILITY_NAMED_IAM
 workflows:
   my_workflow:
