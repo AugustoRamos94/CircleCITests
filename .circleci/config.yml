@@ -2,35 +2,7 @@ version: 2.1
 
 orbs:
   aws-cli: circleci/aws-cli@1.3.1
-
-# jobs:
-#   aws-cli:
-#     executor: aws-cli/default
-#     steps:
-#       - checkout
-#       - aws-cli/setup:
-#           profile-name: AugustoRamos
-#   create_infrastructure:
-#     docker:
-#       - image: amazon/aws-cli
-#     steps:
-#       - checkout
-#       - run:
-#           name: Ensure backend infrastructure exist
-#           command: |
-#             aws cloudformation deploy \
-#               --template-file template.yml \
-#               --stack-name my-stack \
-#               --region=us-west-2
-#               --aws-access-key-id $AWS_ACCESS_KEY_ID
-#               --aws-secret-access-key $AWS_SECRET_ACCESS_KEY
-#               --capabilities CAPABILITY_NAMED_IAM
-# workflows:
-#   my_workflow:
-#     jobs:
-#       - aws-cli
-#       - create_infrastructure
-
+  
 executor:
   name: default
   python-version: 3.7.4
