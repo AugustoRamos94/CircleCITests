@@ -42,7 +42,7 @@ jobs:
               --region=us-west-2 \
               --capabilities CAPABILITY_NAMED_IAM
       - destroy_environment
-        when: on_fail
+          when: on_fail
   configure_infrastructure:
     docker:
       - image: python:3.7-alpine3.11
