@@ -51,7 +51,5 @@ jobs:
 workflows:
   my_workflow:
     jobs:
-      - setupCLI
-      - configure_infrastructure:
-        requires:
-            - setupCLI
+      # - setupCLI
+      - configure_infrastructure
