@@ -1,6 +1,6 @@
 ---
-- name: Exercise
-  hosts: localhost
-
+- name: Listing ec2 instances on CircleCI through Ansible
+  hosts: all
+  user: ubuntu
   roles:
    - print
