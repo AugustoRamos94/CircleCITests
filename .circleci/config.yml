@@ -71,5 +71,5 @@ workflows:
           requires:
             - setupCLI
       - smoke_tests:
-        requires:
-          - configure_infrastructure
+          requires:
+            - configure_infrastructure
