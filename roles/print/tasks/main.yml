@@ -1,8 +1,8 @@
 ---
- - name: Print env variable
-   shell: echo $PATH
+ - name: Listing ec2 instances
+   shell: |
+    aws ec2 describe-instances \
+        --query 'Reservations[*].Instances[*].PublicIpAddress' \
+        --filters "Name=tag:Project,Values=udacity" \
+        --output text >> inventory 
    register: print_result
-
- - name: print message
-   debug:
-     msg: "{{ print_result.stdout_lines }}"

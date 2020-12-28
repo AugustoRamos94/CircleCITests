@@ -7,21 +7,6 @@ executor:
   name: default
   python-version: 3.7.4
 jobs:
-  configure_infrastructure:
-    docker:
-      - image: python:3.7-alpine3.11
-    steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints: ["b5:d7:f7:e3:fc:ad:81:0d:d0:1e:e5:e9:03:36:b0:d3"]
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --update ansible # install the dependencies needed for your playbook
-      - run:
-          name: Configure server
-          command: |
-            ansible-playbook -i inventory.txt playbook.yml
   setupCLI:
     docker:
       - image: amazon/aws-cli
@@ -39,7 +24,7 @@ jobs:
               $AWS_SECRET_ACCESS_KEY \
               --profile augusto-circleCI
           name: Configure AWS Secret Access Key
-      # - checkout
+      - checkout
       # - run:
       #     name: Create AWS Stack
       #     command: |
@@ -48,8 +33,25 @@ jobs:
       #         --stack-name my-stack \
       #         --region=us-west-2 \
       #         --capabilities CAPABILITY_NAMED_IAM
+  configure_infrastructure:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints: ["b5:d7:f7:e3:fc:ad:81:0d:d0:1e:e5:e9:03:36:b0:d3"]
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update ansible # install the dependencies needed for your playbook
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory.txt playbook.yml
 workflows:
   my_workflow:
     jobs:
-      # - setupCLI
-      - configure_infrastructure
+      - setupCLI
+      - configure_infrastructure:
+        require:
+          - setupCLI
